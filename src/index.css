@@ -1,0 +1,242 @@
+@import "tailwindcss";
+
+/* Cinematic luxe (Koenigsegg-style): true black, chrome type, ice accent */
+:root {
+  --bg0: #030303;
+  --bg1: #0a0a0a;
+  --surface: rgba(255, 255, 255, 0.035);
+  --surface-elevated: rgba(255, 255, 255, 0.07);
+  --stroke: rgba(255, 255, 255, 0.09);
+  --text: #fafafa;
+  --muted: #737373;
+  --accent: #22d3ee;
+  --accent-mid: #d4d4d4;
+  --accent2: #f5f5f5;
+  color-scheme: dark;
+}
+
+html {
+  width: 100%;
+  overflow-x: clip;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background:
+    radial-gradient(ellipse 110% 70% at 50% -25%, rgba(34, 211, 238, 0.07), transparent 55%),
+    radial-gradient(ellipse 55% 45% at 110% 90%, rgba(255, 255, 255, 0.04), transparent 50%),
+    radial-gradient(ellipse 45% 35% at -5% 60%, rgba(255, 255, 255, 0.025), transparent 45%),
+    linear-gradient(180deg, var(--bg0) 0%, #080808 45%, var(--bg0) 100%);
+  color: var(--text);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  width: 100%;
+  overflow-x: clip;
+  font-family: "Plus Jakarta Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  line-height: 1.55;
+  letter-spacing: -0.01em;
+}
+
+#root {
+  width: 100%;
+  min-height: 100%;
+  overflow-x: clip;
+}
+
+.font-display {
+  font-family: "Syne", "Plus Jakarta Sans", ui-sans-serif, system-ui, sans-serif;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 55%, white);
+  outline-offset: 3px;
+}
+
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+::selection {
+  background: color-mix(in srgb, var(--accent) 25%, transparent);
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(34, 211, 238, 0.2));
+  border-radius: 999px;
+}
+
+.page-grid-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background-color: var(--bg0);
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.012) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.012) 1px, transparent 1px);
+  background-size: 64px 64px, 64px 64px;
+}
+
+.ring {
+  background: color-mix(in srgb, var(--accent) 6%, transparent);
+  border: 1px solid var(--stroke);
+  box-shadow: 0 0 48px color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+.cursor-glow {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 40;
+  background: radial-gradient(
+    280px 280px at var(--cx, 50%) var(--cy, 50%),
+    rgba(255, 255, 255, 0.04),
+    transparent 65%
+  );
+  mix-blend-mode: screen;
+  contain: strict;
+}
+
+.spotlight::before {
+  content: "";
+  position: absolute;
+  inset: -1px;
+  background: radial-gradient(
+    520px 280px at var(--sx, 50%) var(--sy, 35%),
+    rgba(255, 255, 255, 0.06),
+    transparent 62%
+  );
+  opacity: 0;
+  transition: opacity 320ms ease;
+  pointer-events: none;
+}
+.spotlight:hover::before {
+  opacity: 1;
+}
+
+.spotlight::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0;
+  background: linear-gradient(118deg, transparent 22%, rgba(255, 255, 255, 0.06), transparent 62%);
+  transform: translateX(-55%);
+}
+.spotlight:hover::after {
+  opacity: 1;
+  transform: translateX(55%);
+  transition: transform 720ms cubic-bezier(0.22, 1, 0.36, 1), opacity 240ms ease;
+}
+
+/* Chrome shimmer on accent headline words */
+.text-shimmer {
+  background: linear-gradient(
+    115deg,
+    #525252 0%,
+    #fafafa 38%,
+    #a3a3a3 55%,
+    #e5e5e5 100%
+  );
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: chrome-shimmer 10s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .text-shimmer {
+    animation: none;
+    background: linear-gradient(105deg, #d4d4d4, #fafafa);
+    background-size: 100% auto;
+  }
+}
+
+@keyframes chrome-shimmer {
+  0%,
+  100% {
+    background-position: 0% center;
+  }
+  50% {
+    background-position: 100% center;
+  }
+}
+
+.section-accent {
+  height: 3px;
+  width: 3rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, rgba(34, 211, 238, 0.9), rgba(255, 255, 255, 0.85), rgba(163, 163, 163, 0.6));
+}
+
+.aurora-blob-a {
+  background: radial-gradient(circle, rgba(34, 211, 238, 0.12) 0%, transparent 68%);
+  animation: aurora-drift-a 28s ease-in-out infinite;
+}
+.aurora-blob-b {
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.06) 0%, transparent 65%);
+  animation: aurora-drift-b 32s ease-in-out infinite;
+}
+.aurora-blob-c {
+  background: radial-gradient(circle, rgba(212, 212, 212, 0.05) 0%, transparent 62%);
+  animation: aurora-drift-c 24s ease-in-out infinite;
+}
+@keyframes aurora-drift-a {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(10%, 8%) scale(1.08);
+  }
+}
+@keyframes aurora-drift-b {
+  0%,
+  100% {
+    transform: translate(0, 0) scale(1.04);
+  }
+  50% {
+    transform: translate(-12%, 5%) scale(1);
+  }
+}
+@keyframes aurora-drift-c {
+  0%,
+  100% {
+    transform: translate(0, 0);
+  }
+  50% {
+    transform: translate(6%, -10%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora-blob-a,
+  .aurora-blob-b,
+  .aurora-blob-c {
+    animation: none;
+  }
+}
+
+/* Very light bottom fade only — avoids a heavy dark band on either side */
+.cinematic-vignette {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.35) 0%, transparent 35%);
+}
