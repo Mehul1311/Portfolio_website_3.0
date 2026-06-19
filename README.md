@@ -1,3 +1,59 @@
+🚀 Personal Portfolio Website
+A modern, responsive, and aesthetic personal portfolio website built to showcase my projects, technical skills, and professional journey. Designed with a focus on clean UI/UX and seamless performance.
+
+🛠 Tech Stack
+Frontend: React.js
+
+Styling: Tailwind CSS
+
+Icons: [e.g., Lucide React / FontAwesome]
+
+Deployment: [e.g., Vercel / Netlify]
+
+✨ Key Features
+Fully Responsive: Optimized for all devices—from desktops to smartphones.
+
+Interactive UI: Smooth transitions and hover effects powered by Tailwind CSS.
+
+Optimized Performance: Fast load times and efficient component-based architecture using React.
+
+Clean Design: A minimalist aesthetic focused on readability and user experience.
+
+Project Showcase: Dedicated sections to highlight key projects with live links and repo access.
+
+📸 Preview
+(Insert a screenshot or a GIF of your website here to grab attention)
+
+Markdown
+![Portfolio Preview](link-to-your-image.png)
+🚀 Live Demo
+Check out the live version of the project here: [Link to your live website]
+
+📂 Project Structure
+Plaintext
+portfolio-website/
+├── src/
+│   ├── components/    # Reusable UI components
+│   ├── assets/        # Images, icons, and static files
+│   ├── pages/         # Main page sections
+│   └── App.js         # Main application entry point
+├── public/
+└── tailwind.config.js # Tailwind CSS configuration
+⚙️ How to Run Locally
+Clone the repository:
+
+Bash
+git clone https://github.com/yourusername/your-repo-name.git
+2. **Navigate to the folder:**
+   ```bash
+   cd your-repo-name
+Install dependencies:
+
+npm install
+
+4. **Start the development server:**
+   ```bash
+npm run dev
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
