@@ -1,14 +1,10 @@
 import { useMemo, useState } from 'react'
-import { submitContact } from '../lib/api'
 
 type Status = 'idle' | 'sending' | 'sent' | 'error'
 
 export function ContactForm() {
   const [status, setStatus] = useState<Status>('idle')
   const [error, setError] = useState<string | null>(null)
-  const [savedId, setSavedId] = useState<string | null>(null)
-  const [emailSent, setEmailSent] = useState(false)
-  const [savedToDb, setSavedToDb] = useState(false)
 
   const [name, setName] = useState('')
   const [email, setEmail] = useState('')
@@ -24,21 +20,28 @@ export function ContactForm() {
     if (!canSubmit || disabled) return
     setStatus('sending')
     setError(null)
-    setSavedId(null)
-    setEmailSent(false)
-    setSavedToDb(false)
+    
     try {
-      const res = await submitContact({ name, email, message })
+      // Simulate network delay for UX
+      await new Promise((resolve) => setTimeout(resolve, 800))
+
+      const waText = encodeURIComponent(
+        `*New Message from Portfolio*\n\n*Name:* ${name}\n*Email:* ${email}\n\n*Message:*\n${message}`
+      )
+
+      // Open WhatsApp in a new tab
+      window.open(`https://wa.me/919057902949?text=${waText}`, '_blank')
+
       setStatus('sent')
-      setSavedId(typeof res.id === 'string' ? res.id : null)
-      setEmailSent(res.emailSent === true)
-      setSavedToDb(res.savedToDb === true)
       setName('')
       setEmail('')
       setMessage('')
+
+      // Reset after a few seconds
+      setTimeout(() => setStatus('idle'), 5000)
     } catch (err) {
       setStatus('error')
-      setError(err instanceof Error ? err.message : 'Something went wrong')
+      setError('Something went wrong. Please try again.')
     }
   }
 
@@ -91,18 +94,23 @@ export function ContactForm() {
         <button
           type="submit"
           disabled={!canSubmit || disabled}
-          className="min-h-[44px] rounded-full border border-white/15 bg-white px-5 py-2.5 text-sm font-semibold text-neutral-950 shadow-[0_16px_48px_-12px_rgba(255,255,255,0.2)] transition hover:bg-zinc-100 disabled:cursor-not-allowed disabled:opacity-50"
+          className="min-h-[44px] rounded-full border border-[#25D366]/30 bg-[#25D366] px-5 py-2.5 text-sm font-semibold text-neutral-950 shadow-[0_16px_48px_-12px_rgba(37,211,102,0.4)] transition hover:bg-[#22c35e] disabled:cursor-not-allowed disabled:opacity-50 flex items-center gap-2"
         >
-          {status === 'sending' ? 'Sending…' : status === 'sent' ? 'Sent' : 'Send message'}
+          {status === 'sending' ? (
+            'Opening WhatsApp…'
+          ) : status === 'sent' ? (
+            'Sent!'
+          ) : (
+            <>
+              Send via WhatsApp
+              <span className="text-black/60">↗</span>
+            </>
+          )}
         </button>
 
         <div className="text-xs text-[var(--muted)]">
           {status === 'sent'
-            ? emailSent
-              ? 'Email received — I’ll reply soon.'
-              : savedToDb
-                ? 'Message saved — I’ll reply soon.'
-                : 'Done.'
+            ? 'Thank you! I will get back to you soon.'
             : 'Usually replies within 24 hours.'}
         </div>
       </div>
@@ -111,15 +119,9 @@ export function ContactForm() {
         <p className="mt-4 text-sm leading-relaxed text-red-300/90">{error}</p>
       ) : null}
 
-      {status === 'sent' && savedId ? (
-        <p className="mt-4 text-xs leading-relaxed text-[var(--muted)]">
-          {emailSent && <span className="text-emerald-400/90">✓ Email sent to inbox. </span>}
-          {savedToDb && (
-            <span>
-              Reference: <span className="text-[var(--text)]">{savedId}</span>
-            </span>
-          )}
-          {!emailSent && savedToDb && <span className="text-[var(--muted)]"> (stored securely)</span>}
+      {status === 'sent' ? (
+        <p className="mt-4 text-xs leading-relaxed text-[#25D366]/90">
+          ✓ WhatsApp opened successfully.
         </p>
       ) : null}
     </form>

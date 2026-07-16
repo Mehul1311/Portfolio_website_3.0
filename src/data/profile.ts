@@ -29,9 +29,11 @@ export const profile = {
     githubRepos: 'https://github.com/Mehul1311?tab=repositories',
   },
 
-  about: `I'm Mehul Sain—an aspiring full-stack developer pursuing my MCA at Lovely Professional University. I enjoy shipping complete experiences: structured frontends, solid backend logic, and practical AI features where they add real value.
+  about: `I'm a passionate Full Stack Developer specializing in the MERN stack—crafting modern, scalable, and user-first web applications that solve complex real-world problems.
 
-On GitHub you'll find my virtual assistant experiments, production-style UI clones, and small tools I built to sharpen JavaScript and product thinking.`,
+Recently, I architected an AI-powered KYC Verification System, integrating EasyOCR to automate intelligent data extraction from identity documents. It's a perfect intersection of robust full-stack engineering and practical artificial intelligence.
+
+I'm constantly pushing my boundaries in web development, algorithms, and AI integrations. My ultimate goal is simple: to build high-impact, efficient software solutions that feel effortless to use.`,
 
   skills: [
     'JavaScript',

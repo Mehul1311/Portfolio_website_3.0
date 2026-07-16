@@ -27,7 +27,7 @@ export function HeroScrollCue({ visible }: Props) {
         aria-hidden
       >
         <motion.span
-          className="block size-1 rounded-full bg-cyan-400/90 shadow-[0_0_12px_rgba(34,211,238,0.5)]"
+          className="block size-1 rounded-full bg-purple-400/90 shadow-[0_0_12px_rgba(168,85,247,0.5)]"
           animate={reduced ? {} : { y: [0, 10, 0], opacity: [1, 0.35, 1] }}
           transition={{ duration: 2.4, repeat: Infinity, ease: 'easeInOut' }}
         />

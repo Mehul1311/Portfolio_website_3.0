@@ -12,7 +12,6 @@ import { Marquee } from './components/Marquee'
 import { MagneticButton } from './components/MagneticButton'
 import { ProjectCard } from './components/ProjectCard'
 import { ContactForm } from './components/ContactForm'
-import { healthCheck } from './lib/api'
 import { Footer } from './components/Footer'
 import { HeroPortrait } from './components/HeroPortrait'
 import { SplitWords } from './components/SplitWords'
@@ -28,7 +27,7 @@ const layoutHeader = 'relative z-30 w-full px-3 sm:px-5 md:px-6 lg:px-8 xl:px-10
 
 /** Rounded section panels — depth + consistent rhythm */
 const sectionPanel =
-  'rounded-[1.5rem] md:rounded-[2rem] border border-[var(--stroke)] bg-[var(--surface)]/95 p-6 shadow-[0_24px_80px_-28px_rgba(0,0,0,0.55)] backdrop-blur-sm md:p-8 lg:p-10'
+  'rounded-[1.5rem] md:rounded-[2rem] border border-[var(--stroke)] bg-[var(--surface)]/95 p-6 shadow-[0_24px_80px_-28px_rgba(0,0,0,0.55)] md:p-8 lg:p-10'
 
 const heroContainer = {
   hidden: {},
@@ -47,7 +46,6 @@ const heroItem = {
 }
 
 function App() {
-  const [apiOk, setApiOk] = useState<boolean | null>(null)
   const [siteReady, setSiteReady] = useState(false)
   const [navSolid, setNavSolid] = useState(false)
   const whatsappUrl = getWhatsAppUrl()
@@ -88,19 +86,6 @@ function App() {
     requestAnimationFrame(() => ScrollTrigger.refresh())
   }, [siteReady])
 
-  useEffect(() => {
-    let alive = true
-    healthCheck()
-      .then(() => {
-        if (alive) setApiOk(true)
-      })
-      .catch(() => {
-        if (alive) setApiOk(false)
-      })
-    return () => {
-      alive = false
-    }
-  }, [])
 
   const headerEase = [0.22, 1, 0.36, 1] as const
 
@@ -138,7 +123,7 @@ function App() {
         className={[
           'sticky top-0 z-30 transition-[background-color,backdrop-filter,border-color,box-shadow] duration-500',
           navSolid
-            ? 'border-b border-white/[0.09] bg-[var(--bg0)]/88 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.65)] backdrop-blur-xl'
+            ? 'border-b border-white/[0.09] bg-[var(--bg0)]/95 shadow-[0_8px_32px_-8px_rgba(0,0,0,0.65)]'
             : 'border-b border-transparent bg-transparent',
         ].join(' ')}
       >
@@ -149,7 +134,7 @@ function App() {
             whileHover={{ x: 2 }}
             transition={{ type: 'spring', stiffness: 400, damping: 28 }}
           >
-            <span className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-xs font-bold tracking-tight text-cyan-400 shadow-[0_0_24px_-4px_rgba(34,211,238,0.35)] md:size-11 md:text-sm">
+            <span className="flex size-10 shrink-0 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-xs font-bold tracking-tight text-purple-400 shadow-[0_0_24px_-4px_rgba(168,85,247,0.35)] md:size-11 md:text-sm">
               {profile.initials}
             </span>
             <span className="truncate text-sm font-semibold tracking-wide text-[var(--text)] md:text-base">
@@ -175,7 +160,7 @@ function App() {
               >
                 {label}
                 <motion.span
-                  className="absolute -bottom-1 left-0 block h-px w-full origin-left bg-gradient-to-r from-cyan-400 to-white/80"
+                  className="absolute -bottom-1 left-0 block h-px w-full origin-left bg-gradient-to-r from-purple-400 to-white/80"
                   initial={{ scaleX: 0 }}
                   whileHover={{ scaleX: 1 }}
                   transition={{ duration: 0.25 }}
@@ -185,15 +170,6 @@ function App() {
           </nav>
 
           <div className="flex shrink-0 items-center gap-2 sm:gap-3">
-            <div className="hidden items-center gap-2 rounded-full border border-[var(--stroke)] bg-[var(--surface)] px-3 py-2 text-xs text-[var(--muted)] md:flex">
-              <span
-                className={[
-                  'inline-block size-2 rounded-full',
-                  apiOk === null ? 'bg-white/30' : apiOk ? 'bg-emerald-400/90' : 'bg-red-400/90',
-                ].join(' ')}
-              />
-              API {apiOk === null ? '…' : apiOk ? 'live' : 'offline'}
-            </div>
             {whatsappUrl ? (
               <a
                 href={whatsappUrl}
@@ -231,7 +207,7 @@ function App() {
                 variants={heroItem}
                 className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/[0.1] bg-white/[0.03] px-3 py-1.5 text-[0.65rem] font-medium uppercase tracking-[0.2em] text-zinc-500 sm:px-3.5 sm:py-2 sm:text-xs"
               >
-                <span className="inline-block size-1.5 rounded-full bg-cyan-400 shadow-[0_0_14px_rgba(34,211,238,0.55)]" />
+                <span className="inline-block size-1.5 rounded-full bg-purple-400 shadow-[0_0_14px_rgba(168,85,247,0.55)]" />
                 {profile.badge}
               </motion.p>
 
@@ -476,13 +452,7 @@ function App() {
                     Message on WhatsApp
                     <span className="text-[#bbf7d0]/80">↗</span>
                   </motion.a>
-                ) : (
-                  <div className="rounded-2xl border border-dashed border-[var(--stroke)] bg-[var(--bg0)]/40 px-5 py-4 text-sm text-[var(--muted)]">
-                    Add <code className="rounded bg-[var(--surface)] px-1.5 py-0.5 text-[var(--text)]">VITE_WHATSAPP_NUMBER</code> in{' '}
-                    <code className="rounded bg-[var(--surface)] px-1.5 py-0.5 text-[var(--text)]">frontend/.env</code> (country code +
-                    number, digits only).
-                  </div>
-                )}
+                ) : null}
               </div>
             </div>
 

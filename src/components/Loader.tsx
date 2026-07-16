@@ -57,7 +57,7 @@ export function Loader({ onReady }: Props) {
           }
         >
           <motion.div
-            className="h-px w-full origin-left bg-gradient-to-r from-cyan-400 via-white to-zinc-500"
+            className="h-px w-full origin-left bg-gradient-to-r from-purple-400 via-white to-zinc-500"
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
             transition={{

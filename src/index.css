@@ -4,14 +4,14 @@
 :root {
   --bg0: #030303;
   --bg1: #0a0a0a;
-  --surface: rgba(255, 255, 255, 0.035);
-  --surface-elevated: rgba(255, 255, 255, 0.07);
-  --stroke: rgba(255, 255, 255, 0.09);
-  --text: #fafafa;
-  --muted: #737373;
-  --accent: #22d3ee;
-  --accent-mid: #d4d4d4;
-  --accent2: #f5f5f5;
+  --surface: rgba(255, 255, 255, 0.04);
+  --surface-elevated: rgba(255, 255, 255, 0.08);
+  --stroke: rgba(255, 255, 255, 0.08);
+  --text: #ffffff;
+  --muted: #a1a1aa;
+  --accent: #a855f7;
+  --accent-mid: #ec4899;
+  --accent2: #3b82f6;
   color-scheme: dark;
 }
 
@@ -25,10 +25,10 @@ body {
   height: 100%;
   margin: 0;
   background:
-    radial-gradient(ellipse 110% 70% at 50% -25%, rgba(34, 211, 238, 0.07), transparent 55%),
-    radial-gradient(ellipse 55% 45% at 110% 90%, rgba(255, 255, 255, 0.04), transparent 50%),
-    radial-gradient(ellipse 45% 35% at -5% 60%, rgba(255, 255, 255, 0.025), transparent 45%),
-    linear-gradient(180deg, var(--bg0) 0%, #080808 45%, var(--bg0) 100%);
+    radial-gradient(ellipse 110% 70% at 50% -25%, rgba(168, 85, 247, 0.08), transparent 55%),
+    radial-gradient(ellipse 55% 45% at 110% 90%, rgba(236, 72, 153, 0.05), transparent 50%),
+    radial-gradient(ellipse 45% 35% at -5% 60%, rgba(59, 130, 246, 0.04), transparent 45%),
+    linear-gradient(180deg, var(--bg0) 0%, #050505 45%, var(--bg0) 100%);
   color: var(--text);
 }
 
@@ -76,7 +76,7 @@ textarea:focus-visible {
   width: 6px;
 }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(34, 211, 238, 0.2));
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.12), rgba(168, 85, 247, 0.2));
   border-radius: 999px;
 }
 
@@ -100,16 +100,16 @@ textarea:focus-visible {
 
 .cursor-glow {
   position: fixed;
-  inset: 0;
+  left: 0;
+  top: 0;
+  width: 560px;
+  height: 560px;
+  border-radius: 50%;
   pointer-events: none;
   z-index: 40;
-  background: radial-gradient(
-    280px 280px at var(--cx, 50%) var(--cy, 50%),
-    rgba(255, 255, 255, 0.04),
-    transparent 65%
-  );
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.04), transparent 65%);
   mix-blend-mode: screen;
-  contain: strict;
+  will-change: transform;
 }
 
 .spotlight::before {
@@ -182,19 +182,19 @@ textarea:focus-visible {
   height: 3px;
   width: 3rem;
   border-radius: 999px;
-  background: linear-gradient(90deg, rgba(34, 211, 238, 0.9), rgba(255, 255, 255, 0.85), rgba(163, 163, 163, 0.6));
+  background: linear-gradient(90deg, var(--accent), var(--accent-mid), var(--accent2));
 }
 
 .aurora-blob-a {
-  background: radial-gradient(circle, rgba(34, 211, 238, 0.12) 0%, transparent 68%);
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.15) 0%, transparent 68%);
   animation: aurora-drift-a 28s ease-in-out infinite;
 }
 .aurora-blob-b {
-  background: radial-gradient(circle, rgba(255, 255, 255, 0.06) 0%, transparent 65%);
+  background: radial-gradient(circle, rgba(236, 72, 153, 0.12) 0%, transparent 65%);
   animation: aurora-drift-b 32s ease-in-out infinite;
 }
 .aurora-blob-c {
-  background: radial-gradient(circle, rgba(212, 212, 212, 0.05) 0%, transparent 62%);
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.12) 0%, transparent 62%);
   animation: aurora-drift-c 24s ease-in-out infinite;
 }
 @keyframes aurora-drift-a {
