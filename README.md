@@ -1,120 +1,41 @@
-🚀 Personal Portfolio Website
-A modern, responsive, and aesthetic personal portfolio website built to showcase my projects, technical skills, and professional journey. Designed with a focus on clean UI/UX and seamless performance.
+# Mehul Sain — Portfolio
 
-🛠 Tech Stack
-Frontend: React.js
+A production-ready personal portfolio built with React, TypeScript, Vite, Tailwind CSS, Framer Motion, and GSAP.
 
-Styling: Tailwind CSS
+## Local development
 
-Icons: [e.g., Lucide React / FontAwesome]
+Requirements: Node.js 20.19 or newer and npm.
 
-Deployment: [e.g., Vercel / Netlify]
-
-✨ Key Features
-Fully Responsive: Optimized for all devices—from desktops to smartphones.
-
-Interactive UI: Smooth transitions and hover effects powered by Tailwind CSS.
-
-Optimized Performance: Fast load times and efficient component-based architecture using React.
-
-Clean Design: A minimalist aesthetic focused on readability and user experience.
-
-Project Showcase: Dedicated sections to highlight key projects with live links and repo access.
-
-
-📸 Preview
-(Insert a screenshot or a GIF of your website here to grab attention)
-![Portfolio Preview](link-to-your-image.png)
-
-🚀 Live Demo
-Check out the live version of the project here: [Link to your live website]
-
-📂 Project Structure
-
-portfolio-website/
-├── src/
-│   ├── components/    # Reusable UI components
-│   ├── assets/        # Images, icons, and static files
-│   ├── pages/         # Main page sections
-│   └── App.js         # Main application entry point
-├── public/
-└── tailwind.config.js # Tailwind CSS configuration
-
-
-⚙️ How to Run Locally
-Clone the repository:
-
-git clone https://github.com/yourusername/your-repo-name.git
-
-Install dependencies:
-
-npm install
-4. **Start the development server:**
-   ```bash
+```bash
+npm ci
+Copy-Item .env.example .env
 npm run dev
+```
 
-📬 Contact
-Mehul Sain
+Update `.env` with the values for your environment. Variables prefixed with `VITE_` are embedded in the browser bundle and must never contain secrets.
 
-LinkedIn: https://www.linkedin.com/in/mehulsain/
+| Variable | Required | Purpose |
+| --- | --- | --- |
+| `VITE_WHATSAPP_NUMBER` | Yes | WhatsApp destination in E.164 digits, without `+` |
+| `VITE_API_URL` | Only when using the API helpers | Backend URL without a trailing slash |
 
-Email: mehulsain1603@gmail.com
+## Quality checks
 
-1. Future Enhancements (Roadmap)
-This section shows that you are constantly thinking about improvement and scaling. It’s a huge plus for recruiters.
+```bash
+npm run check
+```
 
-## 🚀 Roadmap
+This runs ESLint, TypeScript compilation, and the optimized Vite production build. The deployable output is generated in `dist/`.
 
-[ ] Dark/Light Mode: Implementing theme toggling using Tailwind's dark mode utility.
+## Deploy to Vercel
 
-[ ] Contact Form Backend: Integrating a service like Formspree or EmailJS to handle form submissions.
+1. Import the repository into Vercel.
+2. Add `VITE_WHATSAPP_NUMBER` under Project Settings → Environment Variables.
+3. Add `VITE_API_URL` if the backend API helpers are used.
+4. Deploy. `vercel.json` defines the build, output directory, asset caching, and baseline security headers.
 
-[ ] Blog Integration: Adding a headless CMS (like Contentful or Sanity) to share technical articles.
+The same app can be deployed to any static host by running `npm ci && npm run build` and publishing `dist/`.
 
-[ ] Performance Optimization: Implementing lazy loading for images and code-splitting for faster initial page loads.
+## Environment safety
 
-
-To make your repository even more professional and "hirable," you should add these three sections to your `README.md`. These details prove that you don't just write code, but you understand how to build and maintain real-world software.
-
----
-
-### 1. Future Enhancements (Roadmap)
-
-This section shows that you are constantly thinking about improvement and scaling. It’s a huge plus for recruiters.
-
-> **## 🚀 Roadmap**
-> * [ ] **Dark/Light Mode:** Implementing theme toggling using Tailwind's dark mode utility.
-> * [ ] **Contact Form Backend:** Integrating a service like Formspree or EmailJS to handle form submissions.
-> * [ ] **Blog Integration:** Adding a headless CMS (like Contentful or Sanity) to share technical articles.
-> * [ ] **Performance Optimization:** Implementing lazy loading for images and code-splitting for faster initial page loads.
-> 
-> 
-
----
-
-### 2. Challenges & Learnings
-
-This section adds "human" depth to your project. It shows you know how to solve problems.
-
-> **## 💡 Key Challenges & Learnings**
-> * **Responsive Design:** Mastering Tailwind's grid and flexbox utilities to ensure the layout remains fluid across mobile, tablet, and desktop devices.
-> * **React Hooks:** Utilized `useState` and `useEffect` for managing complex UI states, such as the navigation menu and project filtering.
-> * **Component Architecture:** Focused on building modular, reusable components to keep the codebase clean and maintainable.
-> 
-> 
-
----
-
-### 3. Acknowledgements & Credits
-
-If you used any specific design patterns, libraries, or inspiration, mentioning them shows you are a collaborative developer.
-
-> **## 🛠 Resources & Credits**
-> * **Design Inspiration:** [Mention if you were inspired by a Dribbble shot or another portfolio].
-> * **Icons:** [Lucide-React/FontAwesome].
-> * **Fonts:** Google Fonts ([Name of your font, e.g., Inter or Poppins]).
-> 
-> 
-
----
-
+Local `.env` variants, build output, dependencies, logs, coverage, and tool caches are ignored by Git. Only `.env.example` is committed as the configuration template.

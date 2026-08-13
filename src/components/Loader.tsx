@@ -33,10 +33,10 @@ export function Loader({ onReady }: Props) {
 
   useEffect(() => {
     if (reduced) {
-      const t = window.setTimeout(() => setVisible(false), 320)
+      const t = window.setTimeout(() => setVisible(false), 80)
       return () => window.clearTimeout(t)
     }
-    const t = window.setTimeout(() => setVisible(false), 1450)
+    const t = window.setTimeout(() => setVisible(false), 520)
     return () => window.clearTimeout(t)
   }, [reduced])
 
@@ -49,10 +49,10 @@ export function Loader({ onReady }: Props) {
           initial={{ opacity: 1 }}
           exit={
             reduced
-              ? { opacity: 0, transition: { duration: 0.35 } }
+              ? { opacity: 0, transition: { duration: 0.16 } }
               : {
                   clipPath: 'inset(0 0 100% 0)',
-                  transition: { duration: 0.65, ease: [0.76, 0, 0.24, 1] as const },
+                  transition: { duration: 0.38, ease: [0.76, 0, 0.24, 1] as const },
                 }
           }
         >
@@ -61,7 +61,7 @@ export function Loader({ onReady }: Props) {
             initial={{ scaleX: 0 }}
             animate={{ scaleX: 1 }}
             transition={{
-              duration: reduced ? 0.2 : 0.85,
+              duration: reduced ? 0.08 : 0.42,
               ease: reduced ? 'linear' : ([0.22, 0.85, 0.22, 1] as const),
             }}
           />
@@ -101,7 +101,7 @@ export function Loader({ onReady }: Props) {
                 className="text-[0.65rem] font-semibold uppercase tracking-[0.55em] text-[var(--muted)] sm:text-xs"
                 initial={{ opacity: 0, letterSpacing: '0.8em' }}
                 animate={{ opacity: 1, letterSpacing: '0.5em' }}
-                transition={{ delay: reduced ? 0 : 0.5, duration: 0.6 }}
+                transition={{ delay: reduced ? 0 : 0.16, duration: 0.28 }}
               >
                 Portfolio
               </motion.p>

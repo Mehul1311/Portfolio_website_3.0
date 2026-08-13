@@ -1,4 +1,5 @@
 import { useMemo, useState } from 'react'
+import { getWhatsAppUrl } from '../lib/env'
 
 type Status = 'idle' | 'sending' | 'sent' | 'error'
 
@@ -20,17 +21,19 @@ export function ContactForm() {
     if (!canSubmit || disabled) return
     setStatus('sending')
     setError(null)
-    
+
     try {
-      // Simulate network delay for UX
-      await new Promise((resolve) => setTimeout(resolve, 800))
+      const whatsappUrl = getWhatsAppUrl()
+      if (!whatsappUrl) {
+        throw new Error('WhatsApp contact is not configured.')
+      }
 
       const waText = encodeURIComponent(
         `*New Message from Portfolio*\n\n*Name:* ${name}\n*Email:* ${email}\n\n*Message:*\n${message}`
       )
 
       // Open WhatsApp in a new tab
-      window.open(`https://wa.me/919057902949?text=${waText}`, '_blank')
+      window.open(`${whatsappUrl}?text=${waText}`, '_blank', 'noopener,noreferrer')
 
       setStatus('sent')
       setName('')
@@ -39,9 +42,9 @@ export function ContactForm() {
 
       // Reset after a few seconds
       setTimeout(() => setStatus('idle'), 5000)
-    } catch (err) {
+    } catch (caught) {
       setStatus('error')
-      setError('Something went wrong. Please try again.')
+      setError(caught instanceof Error ? caught.message : 'Something went wrong. Please try again.')
     }
   }
 

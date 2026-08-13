@@ -18,7 +18,7 @@ export function ParticleTrail() {
     if (!ctx) return
 
     let raf = 0
-    let dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1))
+    const dpr = Math.max(1, Math.min(2, window.devicePixelRatio || 1))
 
     const resize = () => {
       const { innerWidth: w, innerHeight: h } = window
